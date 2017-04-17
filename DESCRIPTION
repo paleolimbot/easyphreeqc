@@ -1,0 +1,13 @@
+Package: easyphreeqc
+Type: Package
+Title: Model Reactions Using USGS Phreeqc
+Version: 0.1.0
+Author: Dewey Dunnington <dewey@fishandwhistle.net>
+Maintainer: Dewey Dunnington <dewey@fishandwhistle.net>
+Description: Provides a more useful interface to the existing phreeqc
+    package.
+Imports: phreeqc
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1

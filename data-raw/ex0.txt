@@ -1,0 +1,21 @@
+TITLE Example 0.--seawater speciation
+SOLUTION 1  SEAWATER FROM NORDSTROM AND OTHERS (1979)
+        units   ppm
+        pH      8.22
+        pe      8.451
+        density 1.023
+        temp    25.0
+        redox   O(0)/O(-2)
+        Ca              412.3
+        Mg              1291.8
+        Na              10768.0
+        K               399.1
+        Fe              0.002
+        Mn              0.0002  pe
+        Si              4.28
+        Cl              19353.0
+        Alkalinity      141.682 as HCO3
+        S(6)            2712.0
+        N(5)            0.29    gfw   62.0
+        N(-3)           0.03    as    NH4
+        O(0)            1.0     O2(g) -0.7
