@@ -4,13 +4,17 @@
 \alias{phreeqc}
 \title{Call phreeqc}
 \usage{
-phreeqc(..., db = NA)
+phreeqc(..., db = NA, quiet = TRUE)
 }
 \arguments{
 \item{...}{A character vector(s) of inputs.}
 
 \item{db}{A database to use (see \link{use_db}). Use NA for the default,
 and NULL to skip (re)loading the database.}
+
+\item{quiet}{Use TRUE to see the full output provided by PHREEQC. This is
+useful to find the species that are considered before adding a
+\link{selected_output}}
 }
 \value{
 A data.frame with the first \link{selected_output}

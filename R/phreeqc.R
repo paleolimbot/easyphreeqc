@@ -8,6 +8,9 @@
 #' @param ... A character vector(s) of inputs.
 #' @param db A database to use (see \link{use_db}). Use NA for the default,
 #'   and NULL to skip (re)loading the database.
+#' @param quiet Use TRUE to see the full output provided by PHREEQC. This is
+#'   useful to find the species that are considered before adding a
+#'   \link{selected_output}
 #'
 #' @return A data.frame with the first \link{selected_output}
 #' @export
@@ -15,9 +18,10 @@
 #' @examples
 #' phreeqc(phreeqc::ex2)
 #'
-phreeqc <- function(..., db = NA) {
+phreeqc <- function(..., db = NA, quiet = TRUE) {
   # concatenate the input
-  input <- c(...)
+  input_list <- list(...)
+  input <- c(unlist(input_list))
 
   # verify input is a string
   if(!is.character(input)) stop("'input' must be an atomic character vector")
@@ -33,14 +37,25 @@ phreeqc <- function(..., db = NA) {
     match.fun(paste0("use_db_", db))(save = FALSE)
   }
 
+  # capture string output as a tempfile
+  out_filename <- tempfile()[1]
+  phreeqc::phrSetOutputFileName(out_filename)
+  phreeqc::phrSetOutputFileOn(TRUE)
+
   # call phreeqc
   phreeqc::phrRunString(input)
-  # return output
+  # return selected output
   output <- phreeqc::phrGetSelectedOutput()
+
+  # if not in quiet mode, message the output
+  if(!quiet) {
+    cat(paste(c(readLines(out_filename), "\n"), collapse = "\n"))
+    unlink(out_filename)
+  }
 
   # if zero-length output, the user did not specify any selected_output
   if(length(output) == 0) {
-    message("Zero-length output. Did you specify at least one selected_output()?")
+    message("Specify at least one selected_output() to retreive results as a data.frame")
     return(NULL)
   }
 
